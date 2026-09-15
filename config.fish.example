@@ -1,0 +1,33 @@
+# Copia este archivo a ~/.config/dictado-voz/config.fish y ajusta los valores
+# a tu propia máquina. install.sh ya hace esta copia automáticamente si no
+# existe, pero DEBES revisar y editar AUDIO_TARGET como mínimo.
+
+# Ruta al binario whisper-cli compilado (whisper.cpp)
+set -gx WHISPER_BIN $HOME/whisper.cpp/build/bin/whisper-cli
+
+# Ruta al modelo ggml descargado
+set -gx WHISPER_MODEL $HOME/whisper.cpp/models/ggml-large-v3-turbo.bin
+
+# Idioma de transcripción (código ISO 639-1: es, en, ca, fr, de...)
+set -gx DICTADO_LANG es
+
+# ID del nodo de audio de PipeWire que quieres usar como micrófono.
+#
+# Averígualo con:
+#   wpctl status
+#
+# Busca tu micrófono real en la sección "Filters" o "Sources" del bloque
+# Audio. Usa el nodo *_source (sin ".split"), o si tu interfaz solo tiene
+# un input mostrado directamente en Sources, usa ese ID.
+#
+# IMPORTANTE: no asumas que el "Default Source" del sistema es correcto.
+# En interfaces de audio externas (Scarlett, GoXLR, etc.) PipeWire a veces
+# configura por defecto un sink como source, lo cual produce grabaciones
+# en silencio y hace que Whisper "alucine" texto inventado (típicamente
+# frases tipo "gracias por ver el vídeo", un artefacto conocido de sus
+# datos de entrenamiento). Verifica siempre grabando un audio de prueba:
+#
+#   pw-record --target TU_ID --rate 16000 --channels 1 test.wav
+#   aplay test.wav
+#
+set -gx AUDIO_TARGET 58
