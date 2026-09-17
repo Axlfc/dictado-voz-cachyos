@@ -33,7 +33,12 @@ if test -f $PIDFILE
     set texto ($WHISPER_BIN -m $WHISPER_MODEL -f $AUDIO -l $DICTADO_LANG -nt 2>/dev/null | string trim)
 
     if test -n "$texto"
-        ydotool type -- "$texto"
+        if type -q wl-copy
+            echo -n "$texto" | wl-copy
+            ydotool key 29:1 47:1 47:0 29:0
+        else
+            ydotool type -- "$texto"
+        end
     else
         notify-send "Dictado" "No se ha entendido nada (¿silencio grabado?)" -u normal
     end

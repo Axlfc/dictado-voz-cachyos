@@ -8,7 +8,7 @@ echo ""
 
 # 1. Dependencias del sistema
 echo "--> Instalando dependencias (pacman)..."
-sudo pacman -S --needed cmake git ffmpeg pipewire-audio ydotool libnotify
+sudo pacman -S --needed cmake git ffmpeg pipewire-audio ydotool libnotify wl-clipboard
 
 # 2. Clonar y compilar whisper.cpp con soporte CUDA
 if [ ! -d "$HOME/whisper.cpp" ]; then

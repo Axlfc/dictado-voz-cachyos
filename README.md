@@ -6,9 +6,11 @@ hablas, vuelves a pulsarlo, y el texto se escribe en la posición del
 cursor en cualquier aplicación.
 
 Usa **whisper.cpp** (con aceleración CUDA) para la transcripción local
-— sin nube, sin API keys — y **ydotool** para escribir el texto, porque
-`wtype` **no funciona en KDE Plasma Wayland** (KWin no implementa el
-protocolo `zwp_virtual_keyboard_v1` que necesita).
+— sin nube, sin API keys — y **wl-clipboard** + **ydotool** para escribir
+el texto manteniendo acentos y caracteres especiales en castellano,
+porque `ydotool type` omite o corrompe caracteres no ASCII y `wtype`
+**no funciona en KDE Plasma Wayland** (KWin no implementa el protocolo
+`zwp_virtual_keyboard_v1` que necesita).
 
 ## Requisitos
 
